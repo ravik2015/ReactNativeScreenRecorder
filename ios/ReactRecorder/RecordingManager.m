@@ -18,7 +18,7 @@ RCT_EXPORT_METHOD(startRecording) {
 }
 
 RCT_EXPORT_METHOD(stopRecording) {
-  RCTLogInfo(@"startRecording");
+  RCTLogInfo(@"stopRecording");
 }
 
 RCT_EXPORT_METHOD(playRecording) {

@@ -8,11 +8,14 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   ListView,
+  NativeModules,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
+
+var RecordingManager = NativeModules.RecordingManager;
 
 class ReactRecorder extends Component {
   getRandomColor() {
@@ -52,13 +55,16 @@ class ReactRecorder extends Component {
           }
         />
         <View style={styles.toolbar}>
-          <TouchableHighlight style={styles.toolbarButton}>
+          <TouchableHighlight style={styles.toolbarButton}
+            onPress={() => RecordingManager.startRecording()}>
             <Text style={styles.toolbarButtonText}>Start</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.toolbarButton}>
+          <TouchableHighlight style={styles.toolbarButton}
+            onPress={() => RecordingManager.stopRecording()}>
             <Text style={styles.toolbarButtonText}>Stop</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.toolbarButton}>
+          <TouchableHighlight style={styles.toolbarButton}
+            onPress={() => RecordingManager.playRecording()}>
             <Text style={styles.toolbarButtonText}>Play</Text>
           </TouchableHighlight>
         </View>
