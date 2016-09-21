@@ -18,11 +18,16 @@ import {
 var RecordingManager = NativeModules.RecordingManager;
 
 class ReactRecorder extends Component {
-  getRandomColor() {
+  getRandomColor() { // Light color
     var letters = '0123456789ABCDEF'.split('');
+    var highLetters = '89ABCDEF'.split('');
     var color = '#';
     for (var i = 0; i < 6; i++ ) {
-      color += letters[Math.floor(Math.random() * 16)];
+      if (i % 2 == 0) {
+        color += highLetters[Math.floor(Math.random() * 8)];
+      } else {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
     }
     return color;
   }
