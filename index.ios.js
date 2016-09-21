@@ -92,18 +92,18 @@ const styles = StyleSheet.create({
   listViewRowPadding: 10,
   listViewRowFontSize: 20,
   toolbar: {
-    backgroundColor:'#81c04d',
-    paddingTop:10,
-    paddingBottom:10,
-    flexDirection:'row',
+    backgroundColor: '#81c04d',
+    flexDirection: 'row',
   },
   toolbarButton: {
     flex: 1,
   },
   toolbarButtonText: {
-    textAlign:'center',
-    fontWeight:'bold',
-    color:'#fff',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
   }
 });
 
