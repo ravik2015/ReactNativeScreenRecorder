@@ -1,0 +1,3 @@
+[submodule "ios/ReactRecorder/Libraries/ASScreenRecorder"]
+	path = ios/ReactRecorder/Libraries/ASScreenRecorder
+	url = git@github.com:alskipp/ASScreenRecorder.git
