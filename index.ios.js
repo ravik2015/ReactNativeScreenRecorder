@@ -10,6 +10,7 @@ import {
   ListView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native';
 
@@ -50,13 +51,17 @@ class ReactRecorder extends Component {
             </Text>
           }
         />
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <View style={styles.toolbar}>
+          <TouchableHighlight style={styles.toolbarButton}>
+            <Text style={styles.toolbarButtonText}>Start</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.toolbarButton}>
+            <Text style={styles.toolbarButtonText}>Stop</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.toolbarButton}>
+            <Text style={styles.toolbarButtonText}>Play</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -80,11 +85,20 @@ const styles = StyleSheet.create({
   },
   listViewRowPadding: 10,
   listViewRowFontSize: 20,
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  toolbar: {
+    backgroundColor:'#81c04d',
+    paddingTop:10,
+    paddingBottom:10,
+    flexDirection:'row',
   },
+  toolbarButton: {
+    flex: 1,
+  },
+  toolbarButtonText: {
+    textAlign:'center',
+    fontWeight:'bold',
+    color:'#fff',
+  }
 });
 
 AppRegistry.registerComponent('ReactRecorder', () => ReactRecorder);
