@@ -1,13 +1,14 @@
+'use strict';
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * ReactRecorder
+ * Author: Aijin (Vince) Yuan  yuanaijin@gmail.com
  */
 
 import React, { Component } from 'react';
 import {
   AppRegistry,
   ListView,
+  NativeAppEventEmitter,
   NativeModules,
   StyleSheet,
   Text,
@@ -44,6 +45,17 @@ class ReactRecorder extends Component {
       isRecording: false,
       hasRecord: false
     };
+
+    var subscription = NativeAppEventEmitter.addListener(
+      'StatusChanged',
+      (status) => {
+        this.setState({ isRecording: status.isRecording });
+        this.setState({ hasRecord: status.hasRecord });
+      }
+    );
+  }
+  componentWillUnmount() {
+    subscription.remove();
   }
   render() {
     var startButtonEnabled = (this.state.isRecording === false);

@@ -8,6 +8,8 @@
 
 #import "RecordingManager.h"
 #import "RCTLog.h"
+#import "RCTBridge.h"
+#import "RCTEventDispatcher.h"
 #import "ASScreenRecorder.h"
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
@@ -24,6 +26,8 @@
 @end
 
 @implementation RecordingManager
+
+@synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE();
 
@@ -49,6 +53,7 @@ RCT_EXPORT_METHOD(startRecording) {
 
     _isRecording = YES;
     _hasRecord = YES;
+    [self notifyStatusChanged];
   });
 }
 
@@ -61,6 +66,7 @@ RCT_EXPORT_METHOD(stopRecording) {
     [recorder stopRecordingWithCompletion:^{
       RCTLogInfo(@"stopRecording");
       _isRecording = NO;
+      [self notifyStatusChanged];
     }];
   });
 }
@@ -85,6 +91,13 @@ RCT_EXPORT_METHOD(playRecording) {
     UIViewController *rootViewController = [[(AppDelegate *)[UIApplication sharedApplication].delegate window] rootViewController];
     [rootViewController presentViewController:controller animated:NO completion:nil];
   });
+}
+
+- (void)notifyStatusChanged {
+  [self.bridge.eventDispatcher
+   sendAppEventWithName:@"StatusChanged"
+   body:@{@"isRecording": [NSNumber numberWithBool:_isRecording],
+          @"hasRecord": [NSNumber numberWithBool:_hasRecord]}];
 }
 
 - (void)removeTempFilePath:(NSString*)filePath
