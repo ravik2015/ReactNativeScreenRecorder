@@ -40,10 +40,15 @@ class ReactRecorder extends Component {
     }
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.index !== r2.index});
     this.state = {
-      dataSource: ds.cloneWithRows(rowsData)
+      dataSource: ds.cloneWithRows(rowsData),
+      isRecording: false,
+      hasRecord: false
     };
   }
   render() {
+    var startButtonEnabled = (this.state.isRecording === false);
+    var stopButtonEnabled = (this.state.isRecording === true);
+    var playButtonEnabled = (this.state.isRecording === false && this.state.hasRecord === true);
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
@@ -62,15 +67,15 @@ class ReactRecorder extends Component {
         <View style={styles.toolbar}>
           <TouchableHighlight style={styles.toolbarButton}
             onPress={() => RecordingManager.startRecording()}>
-            <Text style={styles.toolbarButtonText}>Start</Text>
+            <Text style={startButtonEnabled?styles.toolbarButtonTextEnabled:styles.toolbarButtonTextDisabled}>Start</Text>
           </TouchableHighlight>
           <TouchableHighlight style={styles.toolbarButton}
             onPress={() => RecordingManager.stopRecording()}>
-            <Text style={styles.toolbarButtonText}>Stop</Text>
+            <Text style={stopButtonEnabled?styles.toolbarButtonTextEnabled:styles.toolbarButtonTextDisabled}>Stop</Text>
           </TouchableHighlight>
           <TouchableHighlight style={styles.toolbarButton}
             onPress={() => RecordingManager.playRecording()}>
-            <Text style={styles.toolbarButtonText}>Play</Text>
+            <Text style={playButtonEnabled?styles.toolbarButtonTextEnabled:styles.toolbarButtonTextDisabled}>Play</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -103,10 +108,17 @@ const styles = StyleSheet.create({
   toolbarButton: {
     flex: 1,
   },
-  toolbarButtonText: {
+  toolbarButtonTextEnabled: {
     textAlign: 'center',
     fontWeight: 'bold',
     color: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  toolbarButtonTextDisabled: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#888',
     paddingTop: 10,
     paddingBottom: 10,
   }
