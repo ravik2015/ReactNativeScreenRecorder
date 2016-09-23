@@ -71,7 +71,7 @@ class ReactRecorder extends Component {
           renderRow={
             (rowData) =>
             <Text style={{backgroundColor: rowData.color,
-              padding: styles.listViewRowPadding}}>
+              padding: listViewRowPadding}}>
               {"Hello, this is Row " + (rowData.index + 1) + "."}
             </Text>
           }
@@ -95,6 +95,8 @@ class ReactRecorder extends Component {
   }
 }
 
+const listViewRowPadding = 10;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -111,8 +113,6 @@ const styles = StyleSheet.create({
   listView: {
     alignSelf: 'stretch',
   },
-  listViewRowPadding: 10,
-  listViewRowFontSize: 20,
   toolbar: {
     backgroundColor: '#81c04d',
     flexDirection: 'row',
