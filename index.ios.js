@@ -77,15 +77,15 @@ class ReactRecorder extends Component {
           }
         />
         <View style={styles.toolbar}>
-          <TouchableHighlight style={styles.toolbarButton}
+          <TouchableHighlight style={styles.toolbarButton} underlayColor={toolbarButtonUnderlayColor}
             onPress={() => RecordingManager.startRecording()}>
             <Text style={startButtonEnabled?styles.toolbarButtonTextEnabled:styles.toolbarButtonTextDisabled}>Start</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.toolbarButton}
+          <TouchableHighlight style={styles.toolbarButton} underlayColor={toolbarButtonUnderlayColor}
             onPress={() => RecordingManager.stopRecording()}>
             <Text style={stopButtonEnabled?styles.toolbarButtonTextEnabled:styles.toolbarButtonTextDisabled}>Stop</Text>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.toolbarButton}
+          <TouchableHighlight style={styles.toolbarButton} underlayColor={toolbarButtonUnderlayColor}
             onPress={() => RecordingManager.playRecording()}>
             <Text style={playButtonEnabled?styles.toolbarButtonTextEnabled:styles.toolbarButtonTextDisabled}>Play</Text>
           </TouchableHighlight>
@@ -96,6 +96,7 @@ class ReactRecorder extends Component {
 }
 
 const listViewRowPadding = 10;
+const toolbarButtonUnderlayColor = '#ccc';
 
 const styles = StyleSheet.create({
   container: {
