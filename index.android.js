@@ -16,7 +16,7 @@ import {
   View
 } from 'react-native';
 
-//var RecordingManager = NativeModules.RecordingManager;
+var RecordingManager = NativeModules.RecordingManager;
 
 class ReactRecorder extends Component {
   getRandomColor() { // Light color
