@@ -47,6 +47,7 @@ public class RecordingManager extends ReactContextBaseJavaModule {
     @ReactMethod
     public void playRecording() {
         Log.d(TAG, "playRecording");
+        mWeakActivity.get().playRecording();
     }
 
 }

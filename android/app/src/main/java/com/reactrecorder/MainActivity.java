@@ -110,6 +110,11 @@ public class MainActivity extends ReactActivity {
         stopScreenSharing();
     }
 
+    public void playRecording() {
+        Intent intent = new Intent(this, VideoActivity.class);
+        startActivity(intent);
+    }
+
     private void shareScreen() {
         if (mMediaProjection == null) {
             startActivityForResult(mProjectionManager.createScreenCaptureIntent(), REQUEST_CODE);
