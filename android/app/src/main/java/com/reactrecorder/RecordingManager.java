@@ -19,6 +19,9 @@ public class RecordingManager extends ReactContextBaseJavaModule {
     private static final String TAG = "RecordingManager";
     private static WeakReference<MainActivity> mWeakActivity;
 
+    private boolean mIsRecording = false;
+    private boolean mHasRecord = false;
+
     public static void updateActivity(MainActivity activity) {
         mWeakActivity = new WeakReference<MainActivity>(activity);
     }
@@ -34,18 +37,28 @@ public class RecordingManager extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startRecording() {
+        if (mIsRecording) return;
+
         Log.d(TAG, "startRecording");
         mWeakActivity.get().startRecording();
+        mIsRecording = true;
+        mHasRecord = true;
     }
 
     @ReactMethod
     public void stopRecording() {
+        if (!mIsRecording) return;
+
         Log.d(TAG, "stopRecording");
         mWeakActivity.get().stopRecording();
+        mIsRecording = false;
     }
 
     @ReactMethod
     public void playRecording() {
+        if (mIsRecording) return;
+        if (!mHasRecord) return;
+
         Log.d(TAG, "playRecording");
         mWeakActivity.get().playRecording();
     }

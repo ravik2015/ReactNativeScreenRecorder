@@ -105,6 +105,9 @@ public class MainActivity extends ReactActivity {
     }
 
     public void stopRecording() {
+        if (mMediaRecorder == null) {
+            return;
+        }
         mMediaRecorder.stop();
         mMediaRecorder.reset();
         stopScreenSharing();
