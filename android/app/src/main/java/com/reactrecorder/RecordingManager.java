@@ -12,7 +12,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by vince on 9/24/16.
+ * Created by Vince Yuan on 9/24/16.
  */
 
 public class RecordingManager extends ReactContextBaseJavaModule {

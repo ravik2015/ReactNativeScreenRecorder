@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by vince on 9/24/16.
+ * Created by Vince Yuan on 9/24/16.
  */
 
 public class RecordingManagerReactPackage implements ReactPackage {

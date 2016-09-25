@@ -2,23 +2,15 @@ package com.reactrecorder;
 
 import com.facebook.react.ReactActivity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -40,7 +32,6 @@ public class MainActivity extends ReactActivity {
     private MediaProjection mMediaProjection;
     private VirtualDisplay mVirtualDisplay;
     private MediaProjectionCallback mMediaProjectionCallback;
-    private ToggleButton mToggleButton;
     private MediaRecorder mMediaRecorder;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_PERMISSIONS = 10;
@@ -77,7 +68,6 @@ public class MainActivity extends ReactActivity {
         if (resultCode != RESULT_OK) {
             Toast.makeText(this,
                     "Screen Cast Permission Denied", Toast.LENGTH_SHORT).show();
-            mToggleButton.setChecked(false);
             return;
         }
         mMediaProjectionCallback = new MediaProjectionCallback();
@@ -108,9 +98,14 @@ public class MainActivity extends ReactActivity {
         if (mMediaRecorder == null) {
             return;
         }
-        mMediaRecorder.stop();
-        mMediaRecorder.reset();
-        stopScreenSharing();
+        try {
+            mMediaRecorder.setOnErrorListener(null);
+            mMediaRecorder.stop();
+            mMediaRecorder.reset();
+            stopScreenSharing();
+        } catch (Exception e) {
+
+        }
     }
 
     public void playRecording() {
@@ -161,14 +156,7 @@ public class MainActivity extends ReactActivity {
     private class MediaProjectionCallback extends MediaProjection.Callback {
         @Override
         public void onStop() {
-            if (mToggleButton.isChecked()) {
-                mToggleButton.setChecked(false);
-                mMediaRecorder.stop();
-                mMediaRecorder.reset();
-                Log.v(TAG, "Recording Stopped");
-            }
-            mMediaProjection = null;
-            stopScreenSharing();
+            stopRecording();
         }
     }
 
