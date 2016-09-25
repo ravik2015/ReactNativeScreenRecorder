@@ -20,9 +20,7 @@ public class RecordingManager extends ReactContextBaseJavaModule {
     private static final String TAG = "RecordingManager";
     private static WeakReference<MainActivity> mWeakActivity;
 
-    private ReactApplicationContext mReactContext;
-    private boolean mIsRecording = false;
-    private boolean mHasRecord = false;
+    private static ReactApplicationContext mReactContext;
 
     public static void updateActivity(MainActivity activity) {
         mWeakActivity = new WeakReference<MainActivity>(activity);
@@ -40,41 +38,30 @@ public class RecordingManager extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startRecording() {
-        if (mIsRecording) return;
-
         Log.d(TAG, "startRecording");
         mWeakActivity.get().startRecording();
-        mIsRecording = true;
-        mHasRecord = true;
-        notifyStatusChanged();
     }
 
     @ReactMethod
     public void stopRecording() {
-        if (!mIsRecording) return;
-
         Log.d(TAG, "stopRecording");
         mWeakActivity.get().stopRecording();
-        mIsRecording = false;
-        notifyStatusChanged();
     }
 
     @ReactMethod
     public void playRecording() {
-        if (mIsRecording) return;
-        if (!mHasRecord) return;
-
         Log.d(TAG, "playRecording");
         mWeakActivity.get().playRecording();
     }
 
     // Send status to javascript
-    private void notifyStatusChanged() {
+    public static void notifyStatusChanged() {
         WritableMap params = Arguments.createMap();
-        params.putBoolean("isRecording", mIsRecording);
-        params.putBoolean("hasRecord", mHasRecord);
+        params.putBoolean("isRecording", mWeakActivity.get().isRecording());
+        params.putBoolean("hasRecord", mWeakActivity.get().hasRecord());
         mReactContext
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit("StatusChanged", params);
     }
+
 }

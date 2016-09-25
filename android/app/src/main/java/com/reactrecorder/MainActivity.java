@@ -23,6 +23,16 @@ import java.io.IOException;
 
 public class MainActivity extends ReactActivity {
 
+    private boolean mIsRecording = false;
+    private boolean mHasRecord = false;
+
+    public boolean isRecording() {
+        return mIsRecording;
+    }
+    public boolean hasRecord() {
+        return mHasRecord;
+    }
+
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE = 1000;
     private int mScreenDensity;
@@ -68,33 +78,52 @@ public class MainActivity extends ReactActivity {
         if (resultCode != RESULT_OK) {
             Toast.makeText(this,
                     "Screen Cast Permission Denied", Toast.LENGTH_SHORT).show();
+
+            mIsRecording = false;
+            mHasRecord = false;
+            mMediaRecorder = null;
+            mMediaProjection = null;
+
+            RecordingManager.notifyStatusChanged();
             return;
         }
-        mMediaProjectionCallback = new MediaProjectionCallback();
-        mMediaProjection = mProjectionManager.getMediaProjection(resultCode, data);
-        mMediaProjection.registerCallback(mMediaProjectionCallback, null);
-        mVirtualDisplay = createVirtualDisplay();
-        mMediaRecorder.start();
-    }
 
-    public void onToggleScreenShare(View view) {
-        if (((ToggleButton) view).isChecked()) {
-            initRecorder();
-            shareScreen();
-        } else {
-            mMediaRecorder.stop();
-            mMediaRecorder.reset();
-            Log.v(TAG, "Stopping Recording");
-            stopScreenSharing();
+        try {
+            mMediaProjectionCallback = new MediaProjectionCallback();
+            mMediaProjection = mProjectionManager.getMediaProjection(resultCode, data);
+            mMediaProjection.registerCallback(mMediaProjectionCallback, null);
+            mVirtualDisplay = createVirtualDisplay();
+            mMediaRecorder.start();
+            mIsRecording = true;
+            mHasRecord = true;
+        } catch (Exception e) {
+            mIsRecording = false;
+            mHasRecord = false;
         }
+        RecordingManager.notifyStatusChanged();
     }
 
     public void startRecording() {
-        initRecorder();
-        shareScreen();
+        if (mIsRecording) return;
+
+        try {
+            initRecorder();
+            shareScreen();
+        } catch (Exception e) {
+            Toast.makeText(this,
+                    "Exception happened. Please relaunch the app.", Toast.LENGTH_SHORT).show();
+
+            mIsRecording = false;
+            mHasRecord = false;
+            mMediaRecorder = null;
+            mMediaProjection = null;
+            RecordingManager.notifyStatusChanged();
+        }
     }
 
     public void stopRecording() {
+        if (!mIsRecording) return;
+
         if (mMediaRecorder == null) {
             return;
         }
@@ -105,10 +134,16 @@ public class MainActivity extends ReactActivity {
             stopScreenSharing();
         } catch (Exception e) {
 
+        } finally {
+            mIsRecording = false;
         }
+
+        RecordingManager.notifyStatusChanged();
     }
 
     public void playRecording() {
+        if (mIsRecording || !mHasRecord) return;
+
         Intent intent = new Intent(this, VideoActivity.class);
         startActivity(intent);
     }
