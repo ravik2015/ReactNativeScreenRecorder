@@ -2,9 +2,9 @@ ReactRecorder is a demo React Native project. It records screen into a video on 
 
 ##Screenshots:
 
-![Screenshot](https://github.com/vinceyuan/ReactRecorder/raw/master/ReactRecorder-iOS.png)
+![Screenshot](https://github.com/vinceyuan/ReactRecorder/raw/master/ReactRecorder-iOS.gif)
 
-![Screenshot](https://github.com/vinceyuan/ReactRecorder/raw/master/ReactRecorder-Android.png)
+![Screenshot](https://github.com/vinceyuan/ReactRecorder/raw/master/ReactRecorder-Android.gif)
 
 ##Install:
 
