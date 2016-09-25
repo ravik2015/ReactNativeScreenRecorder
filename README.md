@@ -27,7 +27,7 @@ cd ReactRecorder && npm install
 
 ##Notes:
 
-I didn't find perfect ways to record screen on iOS and Android. Screen recording on iOS is based on [ASScreenRecorder](https://github.com/alskipp/ASScreenRecorder). However, it does not work well in React Native app. Screen recording on Android is based on [this](http://www.truiton.com/2015/05/capture-record-android-screen-using-mediaprojection-apis/) post.
+The bridging works on iOS 8+ and Android 5.0+. But I didn't find perfect ways to record screen on iOS and Android. Screen recording on iOS is based on [ASScreenRecorder](https://github.com/alskipp/ASScreenRecorder). It does not work well in React Native app. I managed to modify it to let it work on iOS 8. On iOS 9 and 10, sometimes the recorded video does not animate, and sometimes it records only once. Screen recording on Android is based on [this](http://www.truiton.com/2015/05/capture-record-android-screen-using-mediaprojection-apis/) post. Though Android 5.0 provides MediaProjection API, it always crashes on my Android 5.0 emulator. It works well on Android 6.0.
 
 ##Author:
 
