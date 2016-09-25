@@ -1,7 +1,5 @@
 package com.reactrecorder;
 
-import android.util.Log;
-
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -38,19 +36,19 @@ public class RecordingManager extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startRecording() {
-        Log.d(TAG, "startRecording");
+        //Log.d(TAG, "startRecording");
         mWeakActivity.get().startRecording();
     }
 
     @ReactMethod
     public void stopRecording() {
-        Log.d(TAG, "stopRecording");
+        //Log.d(TAG, "stopRecording");
         mWeakActivity.get().stopRecording();
     }
 
     @ReactMethod
     public void playRecording() {
-        Log.d(TAG, "playRecording");
+        //Log.d(TAG, "playRecording");
         mWeakActivity.get().playRecording();
     }
 
