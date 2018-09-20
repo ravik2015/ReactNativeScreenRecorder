@@ -1,4 +1,4 @@
-ReactRecorder is a demo React Native project. It records screen into a video on both iOS and Android. The purpose of this project is to show how to bridge between Javascript and iOS/Android code. It runs on iOS 8+ and Android 6.0+.
+ReactNativeScreenRecorder is a demo React Native project. It records screen into a video on both iOS and Android. The purpose of this project is to show how to bridge between Javascript and iOS/Android code. It runs on iOS 8+ and Android 6.0+.
 
 ##Screenshots:
 
@@ -29,30 +29,3 @@ cd ReactRecorder && npm install
 
 The bridging works on iOS 8+ and Android 5.0+. But I didn't find perfect ways to record screen on iOS and Android. Screen recording on iOS is based on [ASScreenRecorder](https://github.com/alskipp/ASScreenRecorder). It does not work well in React Native app. I managed to modify it to let it work on iOS 8. On iOS 9 and 10, sometimes the recorded video does not animate, and sometimes it records only once. Screen recording on Android is based on [this](http://www.truiton.com/2015/05/capture-record-android-screen-using-mediaprojection-apis/) post. Though Android 5.0 provides MediaProjection API, it always crashes on my Android 5.0 emulator. It works well on Android 6.0.
 
-##Author:
-
-Vince Yuan
-
-##License:
-
-###MIT License
-
-Copyright (c) 2016 Vince Yuan
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
